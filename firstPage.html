@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>퀴즈</title>
+    <style>
+         h1 {
+            text-align: center;
+        }
+        button {
+            width: 40%;
+            height: 90px;
+            margin: 5px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .button-container {
+            display: grid;
+            gap: 10px; /* 수정된 간격 */
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .my-button {
+            padding: 15px 20px; /* 수정된 크기 */
+            font-size: 16px; /* 수정된 크기 */
+            text-align: center;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* 변경 효과를 부드럽게 하기 위한 설정 */
+        }
+
+        .my-button:hover {
+            background-color: #45a049;
+        }
+
+        .my-button.clicked {
+            background-color: #2196F3;
+        }
+
+        /* 특정 버튼의 글자 색상 변경 */
+        .my-button.red-text {
+            color: red;
+            font-size: large;
+        }
+
+        /* "no-function" 클래스를 가진 버튼의 스타일 변경 */
+        .my-button.no-function {
+            background-color: #fff;
+           
+            cursor: not-allowed;
+        }
+
+        .my-button.no-function:hover {
+            background-color: #fff;
+            color: #666;
+        }
+
+        .correct-answer {
+            color: white; /* 수정된 색상 */
+        }
+
+        #nextPageButton {
+            width: 30%;
+            height: 40px;
+            margin: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>빨간색 글씨의 범주에 해당되는 것을 오른쪽에서 찾아 동그라미(O)로 표시하세요.</h1>
+    <div class="button-container">
+        <div class="button-row">
+            <button class="my-button no-function red-text">계절</button>
+            <button class="my-button" onclick="checkAnswer(this, '꽃')">꽃</button>
+            <button class="my-button" onclick="checkAnswer(this, '사과')">사과</button>
+            <button class="my-button correct-answer" onclick="checkAnswer(this, '가을')">가을</button>
+            <button class="my-button" onclick="checkAnswer(this, '만두')">만두</button>
+        </div>
+        <div class="button-row">
+            <button class="my-button no-function red-text">가족</button>
+            <button class="my-button" onclick="checkAnswer(this, '책상')">책상</button>
+            <button class="my-button correct-answer" onclick="checkAnswer(this, '아들')">아들</button>
+            <button class="my-button" onclick="checkAnswer(this, '친구')">친구</button>
+            <button class="my-button" onclick="checkAnswer(this, '상자')">상자</button>
+        </div>
+        <div class="button-row">
+            <button class="my-button no-function red-text">음식</button>
+            <button class="my-button correct-answer" onclick="checkAnswer(this, '라면')">라면</button>
+            <button class="my-button" onclick="checkAnswer(this, '자동차')">자동차</button>
+            <button class="my-button" onclick="checkAnswer(this, '부산')">부산</button>
+            <button class="my-button" onclick="checkAnswer(this, '한복')">한복</button>
+        </div>
+        <div class="button-row">
+            <button class="my-button no-function red-text">과일</button>
+            <button class="my-button correct-answer" onclick="checkAnswer(this, '귤')">귤</button>
+            <button class="my-button" onclick="checkAnswer(this, '한글')">한글</button>
+            <button class="my-button" onclick="checkAnswer(this, '피자')">피자</button>
+            <button class="my-button" onclick="checkAnswer(this, '버섯')">버섯</button>
+        </div>
+        <div class="button-row">
+            <button class="my-button no-function red-text">한글</button>
+            <button class="my-button" onclick="checkAnswer(this, 'A')">A</button>
+            <button class="my-button correct-answer" onclick="checkAnswer(this, '하')">하</button>
+            <button class="my-button" onclick="checkAnswer(this, '天地')">天地</button>
+            <button class="my-button" onclick="checkAnswer(this, 'そら')">そら</button>
+        </div>
+        <button id="nextPageButton">다음 페이지</button>
+    </div>
+
+    <script>
+        function checkAnswer(button, correctAnswer) {
+            if (correctAnswer === '가을' || correctAnswer === '아들' || correctAnswer === '라면' || correctAnswer === '귤' || correctAnswer === '하') {
+                if (button.textContent === correctAnswer) {
+                    button.classList.add('correct-answer');
+                    button.classList.add('clicked'); // 클릭 시 색깔 변경
+                    alert('정답입니다!');
+                } else {
+                    alert('틀렸습니다. 다시 시도해보세요.');
+                }
+            } else {
+                alert('오답입니다. 다시 시도해보세요.');
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const nextPageButton = document.getElementById('nextPageButton');
+
+            nextPageButton.addEventListener('click', function() {
+                // 다음 페이지로 이동
+                window.location.href = 'secondPage.html';
+            });
+        });
+    </script>
+
+</body>
+</html>

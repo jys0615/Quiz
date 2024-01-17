@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>퀴즈</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        button {
+            width: 25%;
+            height: 65px;
+            margin: 5px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .button-container {
+            display: grid;
+            gap: 10px; /* 수정된 간격 */
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .my-button {
+            padding: 15px 30px; /* 수정된 크기 */
+            font-size: px; /* 수정된 크기 */
+            text-align: center;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .my-button:hover {
+            background-color: #45a049;
+        }
+        .my-button.clicked {
+            background-color: #2196F3;
+        }
+        /* 특정 버튼의 글자 색상 변경 */
+        .my-button.red-text {
+            color: red;
+        }
+
+        /* "no-function" 클래스를 가진 버튼의 스타일 변경 */
+        .my-button.no-function {
+            background-color: #fff;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        .my-button.no-function:hover {
+            background-color: #fff;
+            color: #666;
+        }
+
+        .correct-answer {
+            color: white; /* 수정된 색상 */
+        }
+
+        #nextPageButton {
+            width: 30%;
+            height: 40px;
+            margin: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>글자판에서 글자 ‘감’을 찾아 동그라미(O) 해보세요.</h1>
+    <div class="button-container">
+        <div class="button-row">
+            <button class="my-button" onclick="checkAnswer(this, '강')">강</button>
+            <button class="my-button" onclick="checkAnswer(this, '감')">감</button>
+            <button class="my-button" onclick="checkAnswer(this, '검')">검</button>
+            <button class="my-button" onclick="checkAnswer(this, '겜')">겜</button>
+            <button class="my-button" onclick="checkAnswer(this, '곰')">곰</button>
+        </div>
+        <div class="button-row">
+            <button class="my-button" onclick="checkAnswer(this, '긍')">긍</button>
+            <button class="my-button" onclick="checkAnswer(this, '강')">강</button>
+            <button class="my-button" onclick="checkAnswer(this, '겡')">겡</button>
+            <button class="my-button" onclick="checkAnswer(this, '감')">감</button>
+            <button class="my-button" onclick="checkAnswer(this, '걍')">걍</button>
+        </div>
+        <div class="button-row">
+            <button class="my-button" onclick="checkAnswer(this, '갓')">갓</button>
+            <button class="my-button" onclick="checkAnswer(this, '깅')">깅</button>
+            <button class="my-button" onclick="checkAnswer(this, '겡')">겡</button>
+            <button class="my-button" onclick="checkAnswer(this, '깃')">깃</button>
+            <button class="my-button" onclick="checkAnswer(this, '궁')">궁</button>
+        </div>
+        <div class="button-row">
+            <button class="my-button" onclick="checkAnswer(this, '궁')">궁</button>
+            <button class="my-button" onclick="checkAnswer(this, '강')">강</button>
+            <button class="my-button" onclick="checkAnswer(this, '굼')">굼</button>
+            <button class="my-button" onclick="checkAnswer(this, '캄')">캄</button>
+            <button class="my-button  correct-answer" onclick="checkAnswer(this, '감')">감</button>
+        </div>
+        <div class="button-row">
+            <button class="my-button  correct-answer" onclick="checkAnswer(this, '감')">감</button>
+            <button class="my-button" onclick="checkAnswer(this, '칸')">칸</button>
+            <button class="my-button" onclick="checkAnswer(this, '갑')">갑</button>
+            <button class="my-button" onclick="checkAnswer(this, '캅')">캅</button>
+            <button class="my-button" onclick="checkAnswer(this, '긍')">긍</button>
+        </div>
+        <div class="button-row">
+            <button class="my-button" onclick="checkAnswer(this, '킨')">킨</button>
+            <button class="my-button  correct-answer" onclick="checkAnswer(this, '감')">감</button>
+            <button class="my-button" onclick="checkAnswer(this, '간')">간</button>
+            <button class="my-button" onclick="checkAnswer(this, '강')">강</button>
+            <button class="my-button  correct-answer" onclick="checkAnswer(this, '감')">감</button>
+        </div>
+        <div class="button-row">
+            <button class="my-button" onclick="checkAnswer(this, '군')">군</button>
+            <button class="my-button" onclick="checkAnswer(this, '건')">건</button>
+            <button class="my-button" onclick="checkAnswer(this, '갈')">갈</button>
+            <button class="my-button" onclick="checkAnswer(this, '겜')">겜</button>
+            <button class="my-button" onclick="checkAnswer(this, '검')">검</button>
+        </div>        
+        <button id="nextPageButton">다음 페이지</button>
+    </div>
+
+    <script>
+        function checkAnswer(button, correctAnswer) {
+            if (correctAnswer === '감') {
+                if (button.textContent === correctAnswer) {
+                    button.classList.add('correct-answer');
+                    button.classList.add('clicked');
+                    alert('정답입니다!');
+                } else {
+                    alert('틀렸습니다. 다시 시도해보세요.');
+                }
+            } else {
+                alert('오답입니다. 다시 시도해보세요.');
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const nextPageButton = document.getElementById('nextPageButton');
+
+            nextPageButton.addEventListener('click', function() {
+                // 다음 페이지로 이동
+                window.location.href = 'drawing.html';
+            });
+        });
+    </script>
+
+</body>
+</html>

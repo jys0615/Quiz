@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 60%;
+      margin: 20px;
+    }
+
+    td {
+      width: 25%;
+      padding: 0;
+      text-align: center;
+      border: 1px solid black;
+    }
+
+    button {
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      overflow: hidden;
+      background-color: #eee;
+      transition: background-color 0.3s;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      user-drag: none;
+      user-select: none;
+    }
+  </style>
+  <title>4x4 Table with Image Buttons</title>
+</head>
+<body>
+
+  <table id="matrixTable">
+    <!-- Table will be generated dynamically using JavaScript -->
+  </table>
+  <button id="nextPageButton">다음 페이지</button>
+  <script>
+    const matrix = [
+      ['야채.png', '야채2.png', '야채.png', '야채2.png'],
+      ['야채.png', '야채3.png', '야채.png', '야채3.png'],
+      ['야채.png', '야채2.png', '야채2.png', '야채3.png'],
+      ['야채2.png', '야채.png', '야채3.png', '야채3.png']
+    ];
+  
+    const table = document.getElementById('matrixTable');
+    let isMouseDown = false;
+  
+    for (let i = 0; i < matrix.length; i++) {
+      const row = document.createElement('tr');
+  
+      for (let j = 0; j < matrix[i].length; j++) {
+        const cell = document.createElement('td');
+        const button = document.createElement('button');
+        const img = document.createElement('img');
+  
+        img.src = matrix[i][j];
+        button.appendChild(img);
+  
+        button.addEventListener('mousedown', () => {
+          isMouseDown = true;
+          toggleColor(button);
+        });
+  
+        button.addEventListener('mouseup', () => {
+          isMouseDown = false;
+        });
+  
+        button.addEventListener('mouseenter', () => {
+          if (isMouseDown) {
+            toggleColor(button);
+          }
+        });
+  
+        button.addEventListener('dragstart', (e) => e.preventDefault());
+  
+        cell.appendChild(button);
+        row.appendChild(cell);
+      }
+  
+      table.appendChild(row);
+    }
+  
+    let correctButtons = [0, 4, 8]; // Indices of 1st, 5th, and 9th buttons
+  
+    function toggleColor(button) {
+      if (button.style.backgroundColor === '' || button.style.backgroundColor === 'white') {
+        button.style.backgroundColor = '#a0d468'; // Change to your desired color
+      } else {
+        button.style.backgroundColor = 'white';
+      }
+  
+      const buttonIndex = getButtonIndex(button);
+      if (correctButtons.includes(buttonIndex)) {
+        checkAnswer();
+      }
+    }
+  
+    function getButtonIndex(button) {
+      const allButtons = document.querySelectorAll('button');
+      return Array.from(allButtons).indexOf(button);
+    }
+  
+    function checkAnswer() {
+      const areAllCorrect = correctButtons.every(index => {
+        const button = document.querySelectorAll('button')[index];
+        return button.style.backgroundColor === '#a0d468'; // Change to your desired color
+      });
+  
+      if (areAllCorrect) {
+        alert('정답!');
+      }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+            const nextPageButton = document.getElementById('nextPageButton');
+
+            nextPageButton.addEventListener('click', function() {
+                // 다음 페이지로 이동
+                window.location.href = 'shape.html';
+            });
+        });
+  </script>
+
+</body>
+</html>

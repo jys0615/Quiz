@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: calc(100vw * 9 / 16); /* 가로 16:세로 9 비율에 따라 높이 계산 */
+    }
+
+    .season-container1 {
+      display: flex;
+      flex-direction: column; /* 수직으로 정렬 */
+      gap: 5px; /* 간격 조절 */
+    }
+    .season-container {
+      display: flex;
+      flex-direction: column; /* 수직으로 정렬 */
+      gap: 5px; /* 간격 조절 */
+    }
+
+    .season {
+      flex: 1;
+      position: relative;
+      background-color: #f0f0f0; /* 공간의 배경색을 설정하거나 필요에 따라 스타일을 수정하세요 */
+      border: 1px solid #ccc; /* 공간의 테두리를 설정하거나 필요에 따라 스타일을 수정하세요 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: calc(100vw / 16 * 2); /* 가로 16:세로 9 비율에 따라 가로 크기 계산 */
+      height: calc(100vw / 16 * 2 * 9 / 16); /* 가로 16:세로 9 비율에 따라 세로 크기 계산 */
+    }
+
+    .season-container1 {
+      margin-right: 1250px; /* 1번째 컨테이너를 페이지의 왼쪽 끝으로 이동 *//* 왼쪽 공간 제거 */
+    }
+
+
+    /* 두 컨테이너 사이의 마진을 조절 */
+    .season-container:not(:last-child) {
+      margin-bottom: 5px;
+    }
+  </style>
+  <title>계절 공간</title>
+</head>
+<body>
+  <div class="season-container1">
+    <div class="season">봄</div>
+    <div class="season">여름</div>
+    <div class="season">가을</div>
+    <div class="season">겨울</div>
+  </div>
+
+  <div class="season-container">
+    <div class="season">봄</div>
+    <div class="season">여름</div>
+    <div class="season">가을</div>
+    <div class="season">겨울</div>
+  </div>
+</body>
+</html>

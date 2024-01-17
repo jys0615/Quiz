@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>캔버스와 이미지 나란히 배치</title>
+  <style>
+    .container {
+      display: flex;
+    }
+
+    #myCanvas {
+      border: 1px solid #000;
+    }
+
+    .image-container {
+      margin-left: 20px; /* 적절한 간격 설정 */
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="image-container">
+      <img src="img/clock1.jpg" alt="Image">
+      <!-- 추가 이미지를 필요에 따라 계속해서 나열 가능 -->
+    </div>
+    <div>
+      <canvas id="myCanvas" width="1275" height="1794"></canvas>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // 캔버스 배경에 이미지 그리기
+    const backgroundImage = new Image();
+    backgroundImage.src = 'img/clock2.jpg'; // 이미지 파일의 경로
+    backgroundImage.onload = function() {
+      ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+    };
+
+    let isDrawing = false;
+    let startCoords = { x: 0, y: 0 };
+
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseout', stopDrawing);
+
+    function startDrawing(e) {
+      isDrawing = true;
+      startCoords = getMouseCoords(e);
+      ctx.beginPath();
+      ctx.moveTo(startCoords.x, startCoords.y);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+
+      const currentCoords = getMouseCoords(e);
+
+      ctx.lineWidth = 5;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = '#000';
+
+      ctx.lineTo(currentCoords.x, currentCoords.y);
+      ctx.stroke();
+
+      // 시작점을 계속 업데이트하여 자연스러운 직선을 그립니다.
+      startCoords = currentCoords;
+      ctx.beginPath();
+      ctx.moveTo(startCoords.x, startCoords.y);
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+      ctx.beginPath();
+    }
+
+    function getMouseCoords(e) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+    }
+  </script>
+</body>
+</html>
